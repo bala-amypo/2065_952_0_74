@@ -13,7 +13,23 @@ public class Student{
       return id;
     }
     public void setId(Long id){
-        this.
+        this.id=id;
     }
+    public String getName(){
+        return name;
+    }
+    public void setName(String name){
+        this.name=name;
+    }
+    public String getDept(){
+        return dept;
+    }
+    public void setDept(String dept){
+        this.dept=dept;
+    }
+    public LocalDate getDob(){
+        return dob;
+    }
+    public void setDob(Local)
 
 }
