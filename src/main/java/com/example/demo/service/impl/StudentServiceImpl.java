@@ -10,7 +10,7 @@ import com.example.demo.service.StudentService;
 public class StudentServiceImpl implements StudentService{
     @Autowired
     StudentRepository  stdrepo;
-   @Override
+    @Override
     public Student poststudent(Student st){
         retrun stdrepo.save(st);
     }
