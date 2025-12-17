@@ -7,12 +7,13 @@ import com.example.demo.service.StudentService;
 import com.example.demo.entity.Student;
 
 @RestController
-public class StudentController{
+public class StudentController {
+
     @Autowired
     StudentService stdser;
 
-     @PosttMapping("/addStudent")
-     public Student addStudent(@RequestBody Student st){
-          retrun stdser.poststudent(st);
-     }
+    @PostMapping("/addStudent")
+    public Student addStudent(@RequestBody Student st) {
+        return stdser.poststudent(st);
+    }
 }
