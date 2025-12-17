@@ -1,9 +1,11 @@
-import com.example.demo.service.impl;
+package com.example.demo.service.impl;
 
 import com.example.demo.service.StudentService;
 import org.springframework.stereotype.Service;
-
 @Service
-public class StudentServiceImp implements StudentService{
-
-}
+public class StudentServiceImpl implements StudentService{
+  @Override
+    public Student poststudent(Student st){
+        
+    }
+ }
