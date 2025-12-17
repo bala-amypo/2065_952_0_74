@@ -13,6 +13,6 @@ public class StudentController{
 
      @PosttMapping("/addStudent")
      public Student addStudent(@RequestBody Student st){
-          retrun stdser.poststuden
+          retrun stdser.poststudent(st);
      }
 }
