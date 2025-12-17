@@ -1,10 +1,12 @@
 package com.example.demo.entity;
 
 import java.time.LocalDate;
-
-import jakarta.
+// import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 @entity
 public class Student{
+    @Id
     private Long id;
     private String name;
     private String dept;
