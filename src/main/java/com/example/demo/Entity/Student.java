@@ -2,16 +2,19 @@ package com.example.demo.entity;
 
 import java.time.LocalDate;
 import jakarta.persistence.*;
-
+import jakarta.validation.constraints.*;
 @Entity
 public class Student {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    
+    @NotBlank(message="Name should not be blank")
     private String name;
     private String dept;
+
+    @Past
     private LocalDate dob;
     private float cgpa;
 
