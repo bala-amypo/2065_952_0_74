@@ -2,43 +2,41 @@ package com.example.demo.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import java.util.List;
-import java.util.Optional;
-
+import java.util.*;
 import com.example.demo.entity.Student;
 import com.example.demo.repository.StudentRepository;
 import com.example.demo.service.StudentService;
-
 @Service
 public class StudentServiceImpl implements StudentService {
 
     @Autowired
-    private StudentRepository studentRepository;
+    StudentRepository stdrepo;
 
     @Override
-    public Student addStudent(Student student) {
-        return studentRepository.save(student);
+    public Student poststudent(Student st) {
+        return stdrepo.save(st);
     }
-
     @Override
-    public List<Student> getAllStudents() {
-        return studentRepository.findAll();
+    public List<Student> getAllStudents(){
+        return stdrepo.findAll();
     }
-
     @Override
-    public Optional<Student> getStudentById(Long id) {
-        return studentRepository.findById(id);
+    public Optional<Student> getById(Long id){
+        return stdrepo.findById(id);
     }
-
     @Override
-    public String updateStudent(Long id, Student student) {
-        boolean exists = studentRepository.existsById(id);
-        if (exists) {
-            student.setId(id);
-            studentRepository.save(student);
-            return "Student updated successfully";
-        } else {
-            return "Student with ID " + id + " not found";
+    public String updateData(Long id,Student st){
+        boolean status=stdrepo.existsById(id);
+        if(status){
+            st.setId(id);
+            stdrepo.save(st);
+            return "Student Updated Successfully";
+        }
+        else{
+            return "Student with ID "+id+" Not found";
         }
     }
+    @Override
+    public
 }
+
