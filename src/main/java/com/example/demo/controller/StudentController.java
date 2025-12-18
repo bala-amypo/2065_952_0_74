@@ -17,7 +17,7 @@ public class StudentController {
 
     @PostMapping("/addStudent")
     public Student addStudent(@RequestBody Student st) {
-        return stdser.poststudent(st);
+        return stdser.addStudent(st);
     }
 
     @GetMapping("/getall")
@@ -27,14 +27,16 @@ public class StudentController {
 
     @GetMapping("/getById/{id}")
     public Optional<Student> getId(@PathVariable Long id) {
-        return stdser.getById(id);
+        return stdser.getStudentById(id);
     }
+
     @PutMapping("/update/{id}")
-    public String update(@PathVariable Long id,@RequestBody Student st){
-        return stdser.updateData(id,st);
-    } 
+    public String update(@PathVariable Long id, @RequestBody Student st) {
+        return stdser.updateStudent(id, st);
+    }
+
     @DeleteMapping("/delete/{id}")
-    public String delete(@PathVariable Long id){
+    public String delete(@PathVariable Long id) {
         return stdser.deleteData(id);
     }
 }
