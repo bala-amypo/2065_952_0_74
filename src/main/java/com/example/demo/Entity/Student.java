@@ -16,6 +16,8 @@ public class Student {
 
     @Past
     private LocalDate dob;
+
+    @DecimalMin(value=6.5)
     private float cgpa;
 
     // Default constructor (required by JPA)
