@@ -2,10 +2,10 @@ package com.example.demo.controller;
 
 import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity; // For ResponseEntity
+import org.springframework.http.ResponseEntity;
 
-import java.util.List;       // Fix for List
-import java.util.Optional;   // Fix for Optional
+import java.util.List;
+import java.util.Optional;
 
 import com.example.demo.entity.Student;
 import com.example.demo.service.StudentService;
