@@ -17,7 +17,7 @@ public class Student {
     @Past
     private LocalDate dob;
 
-    @DecimalMin(value=6.5)
+    @DecimalMin(value=6.5f,message="sdfghjk")
     private float cgpa;
 
     
