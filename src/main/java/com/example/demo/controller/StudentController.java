@@ -31,6 +31,6 @@ public class StudentController {
     }
     @PutMapping("/update/{id}")
     public String update(@PathVariable Long id,@RequestBody Student st){
-        return stdsre.updateData(id,st);
+        return stdser.updateData(id,st);
     } 
 }
