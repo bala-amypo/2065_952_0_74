@@ -5,5 +5,5 @@ import com.example.demo.entity.Student;
 public interface StudentService{
     Student poststudent(Student st);
     List<Student>getAllStudents();
-    Optional<Student>getByID(Long id);
+    Optional<Student>getById(Long id);
 }
