@@ -42,10 +42,9 @@ public class StudentServiceImpl implements StudentService {
       if(status){
         stdrepo.deleteById(id);
         return "Student Deleted Successfully";
-    }
-    else{
+      }
+      else{
         retrun "Student with ID "+id+ "Not Found";
+      }
     }
-
-}
 }
