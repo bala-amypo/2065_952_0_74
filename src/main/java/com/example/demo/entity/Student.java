@@ -20,11 +20,11 @@ public class Student {
     @DecimalMin(value=6.5)
     private float cgpa;
 
-    // Default constructor (required by JPA)
+    
     public Student() {
     }
 
-    // Parameterized constructor
+    
     public Student(Long id, String name, String dept, LocalDate dob, float cgpa) {
         this.id = id;
         this.name = name;
@@ -33,7 +33,7 @@ public class Student {
         this.cgpa = cgpa;
     }
 
-    // Getters & Setters
+    
     public Long getId() {
         return id;
     }
