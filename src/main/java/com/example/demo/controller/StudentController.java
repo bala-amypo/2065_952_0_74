@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 import java.util.Optional;
+import jakarta.validation.Valid;
 
 import com.example.demo.service.StudentService;
 import com.example.demo.entity.Student;
@@ -16,7 +17,7 @@ public class StudentController {
     StudentService stdser;
 
     @PostMapping("/addStudent")
-    public Student addStudent(@RequestBody Student st) {
+    public Student addStudent(@Valid @RequestBody Student st) {
         return stdser.addStudent(st);
     }
 
