@@ -1,14 +1,13 @@
 package com.example.demo.service.impl;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import java.util.List;
+import java.util.Optional;
 
 import jakarta.transaction.Transactional;
 
 import com.example.demo.entity.Student;
-import com.example.demo.exception.DummyException;
 import com.example.demo.repository.StudentRepository;
 import com.example.demo.service.StudentService;
 
@@ -18,41 +17,49 @@ public class StudentServiceImpl implements StudentService {
     @Autowired
     private StudentRepository stdrepo;
 
+    // POST operation with @Transactional
     @Transactional
     @Override
     public Student addStudent(Student st) {
         return stdrepo.save(st);
     }
 
+    // GET all students
     @Override
     public List<Student> getAllStudents() {
         return stdrepo.findAll();
     }
 
+    // GET student by ID
     @Override
-    public Student getStudentById(Long id) {
-        return stdrepo.findById(id)
-                .orElseThrow(() -> new DummyException("Student not found with id " + id));
+    public Optional<Student> getStudentById(Long id) {
+        return stdrepo.findById(id);
     }
 
+    // UPDATE student
     @Transactional
     @Override
-    public Student updateStudent(Long id, Student st) {
-        if (stdrepo.existsById(id)) {
+    public String updateStudent(Long id, Student st) {
+        boolean exists = stdrepo.existsById(id);
+        if (exists) {
             st.setId(id);
-            return stdrepo.save(st);
+            stdrepo.save(st);
+            return "Student Updated Successfully";
         } else {
-            throw new DummyException("Student not found with id " + id);
+            return "Student with ID " + id + " Not Found";
         }
     }
 
+    // DELETE student
     @Transactional
     @Override
-    public void deleteData(Long id) {
-        if (stdrepo.existsById(id)) {
+    public String deleteData(Long id) {
+        boolean exists = stdrepo.existsById(id);
+        if (exists) {
             stdrepo.deleteById(id);
+            return "Student Deleted Successfully";
         } else {
-            throw new DummyException("Student not found with id " + id);
+            return "Student with ID " + id + " Not Found";
         }
     }
 }
