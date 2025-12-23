@@ -1,9 +1,9 @@
 package com.example.demo.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import java.util.List;
-import java.util.Optional;
 
 import jakarta.transaction.Transactional;
 
@@ -18,19 +18,10 @@ public class StudentServiceImpl implements StudentService {
     @Autowired
     private StudentRepository stdrepo;
 
-    // Only POST operation should be transactional
     @Transactional
     @Override
     public Student addStudent(Student st) {
-        // Save the student first
-        Student savedStudent = stdrepo.save(st);
-
-        // Example condition to throw an exception
-        if ("abcd".equals(st.getName())) {
-            throw new DummyException("Testing");
-        }
-
-        return savedStudent;
+        return stdrepo.save(st);
     }
 
     @Override
@@ -39,28 +30,29 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public Optional<Student> getStudentById(Long id) {
-        return stdrepo.findById(id);
+    public Student getStudentById(Long id) {
+        return stdrepo.findById(id)
+                .orElseThrow(() -> new DummyException("Student not found with id " + id));
     }
 
+    @Transactional
     @Override
-    public String updateStudent(Long id, Student st) {
+    public Student updateStudent(Long id, Student st) {
         if (stdrepo.existsById(id)) {
             st.setId(id);
-            stdrepo.save(st);
-            return "Student Updated Successfully";
+            return stdrepo.save(st);
         } else {
-            return "Student with ID " + id + " Not Found";
+            throw new DummyException("Student not found with id " + id);
         }
     }
 
+    @Transactional
     @Override
-    public String deleteData(Long id) {
+    public void deleteData(Long id) {
         if (stdrepo.existsById(id)) {
             stdrepo.deleteById(id);
-            return "Student Deleted Successfully";
         } else {
-            return "Student with ID " + id + " Not Found";
+            throw new DummyException("Student not found with id " + id);
         }
     }
 }
