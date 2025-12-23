@@ -35,7 +35,7 @@ public class StudentServiceImpl implements StudentService {
                 .orElseThrow(() -> new DummyException("Student not found with id " + id));
     }
 
-    @Transactional
+    
     @Override
     public Student updateStudent(Long id, Student st) {
         if (stdrepo.existsById(id)) {
@@ -46,7 +46,7 @@ public class StudentServiceImpl implements StudentService {
         }
     }
 
-    @Transactional
+    
     @Override
     public void deleteData(Long id) {
         if (stdrepo.existsById(id)) {
