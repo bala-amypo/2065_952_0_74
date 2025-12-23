@@ -14,11 +14,21 @@ public class StudentServiceImpl implements StudentService {
     StudentRepository stdrepo;
 
     @Transactional
-    @Override
-    public Student addStudent(Student st) {
-        return stdrepo.save(st);
-        throw new DummyException(msg: "Testing");
+@Override
+public Student addStudent(Student st) {
+    // Save the student first
+    Student savedStudent = stdrepo.save(st);
+
+    // Check some condition and throw exception if needed
+    if (st.getName().equals("abcd")) {
+        throw new DummyException("Testing");
     }
+
+    // Return the saved student
+    return savedStudent;
+}
+
+    
 
     @Override
     public List<Student> getAllStudents() {
