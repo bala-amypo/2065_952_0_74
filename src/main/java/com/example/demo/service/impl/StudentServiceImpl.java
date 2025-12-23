@@ -2,8 +2,13 @@ package com.example.demo.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import java.util.*;
+import java.util.List;
+import java.util.Optional;
+
+import jakarta.transaction.Transactional;
+
 import com.example.demo.entity.Student;
+import com.example.demo.exception.DummyException;
 import com.example.demo.repository.StudentRepository;
 import com.example.demo.service.StudentService;
 
@@ -11,24 +16,22 @@ import com.example.demo.service.StudentService;
 public class StudentServiceImpl implements StudentService {
 
     @Autowired
-    StudentRepository stdrepo;
+    private StudentRepository stdrepo;
 
+    // Only POST operation should be transactional
     @Transactional
-@Override
-public Student addStudent(Student st) {
-    // Save the student first
-    Student savedStudent = stdrepo.save(st);
+    @Override
+    public Student addStudent(Student st) {
+        // Save the student first
+        Student savedStudent = stdrepo.save(st);
 
-    // Check some condition and throw exception if needed
-    if (st.getName().equals("abcd")) {
-        throw new DummyException("Testing");
+        // Example condition to throw an exception
+        if ("abcd".equals(st.getName())) {
+            throw new DummyException("Testing");
+        }
+
+        return savedStudent;
     }
-
-    // Return the saved student
-    return savedStudent;
-}
-
-    
 
     @Override
     public List<Student> getAllStudents() {
@@ -42,20 +45,18 @@ public Student addStudent(Student st) {
 
     @Override
     public String updateStudent(Long id, Student st) {
-        boolean status = stdrepo.existsById(id);
-        if (status) {
+        if (stdrepo.existsById(id)) {
             st.setId(id);
             stdrepo.save(st);
             return "Student Updated Successfully";
         } else {
-            return "Student with ID " + id + " Not found";
+            return "Student with ID " + id + " Not Found";
         }
     }
 
     @Override
     public String deleteData(Long id) {
-        boolean status = stdrepo.existsById(id);
-        if (status) {
+        if (stdrepo.existsById(id)) {
             stdrepo.deleteById(id);
             return "Student Deleted Successfully";
         } else {
