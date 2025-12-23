@@ -16,6 +16,7 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public Student addStudent(Student st) {
         return stdrepo.save(st);
+        throw new DummyException(msg: "Testing");
     }
 
     @Override
