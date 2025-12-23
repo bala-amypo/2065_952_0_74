@@ -1,43 +1,45 @@
 package com.example.demo.controller;
 
-import org.springframework.web.bind.annotation.*;
-import org.springframework.beans.factory.annotation.Autowired;
-
 import java.util.List;
-import java.util.Optional;
+
 import jakarta.validation.Valid;
 
-import com.example.demo.service.StudentService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
 import com.example.demo.entity.Student;
+import com.example.demo.service.StudentService;
 
 @RestController
+@RequestMapping("/student")
 public class StudentController {
 
     @Autowired
-    StudentService stdser;
+    private StudentService stdser;
 
-    @PostMapping("/addStudent")
+    @PostMapping("/add")
     public Student addStudent(@Valid @RequestBody Student st) {
         return stdser.addStudent(st);
     }
 
-    @GetMapping("/getall")
-    public List<Student> get() {
+    @GetMapping("/all")
+    public List<Student> getAllStudents() {
         return stdser.getAllStudents();
     }
 
-    @GetMapping("/getById/{id}")
-    public Optional<Student> getId(@PathVariable Long id) {
+    @GetMapping("/{id}")
+    public Student getStudentById(@PathVariable Long id) {
         return stdser.getStudentById(id);
     }
 
     @PutMapping("/update/{id}")
-    public String update(@PathVariable Long id, @RequestBody Student st) {
+    public Student updateStudent(@PathVariable Long id, @RequestBody Student st) {
         return stdser.updateStudent(id, st);
     }
 
     @DeleteMapping("/delete/{id}")
-    public String delete(@PathVariable Long id) {
-        return stdser.deleteData(id);
+    public String deleteStudent(@PathVariable Long id) {
+        stdser.deleteData(id);
+        return "Student deleted successfully";
     }
 }
