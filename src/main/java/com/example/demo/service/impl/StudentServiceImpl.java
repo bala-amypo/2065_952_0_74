@@ -13,6 +13,7 @@ public class StudentServiceImpl implements StudentService {
     @Autowired
     StudentRepository stdrepo;
 
+    @Transactional
     @Override
     public Student addStudent(Student st) {
         return stdrepo.save(st);
